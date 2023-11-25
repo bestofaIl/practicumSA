@@ -1,0 +1,648 @@
+### A Pluto.jl notebook ###
+# v0.19.30
+
+using Markdown
+using InteractiveUtils
+
+# ╔═╡ a9dd14c7-4f79-421c-95af-67aa60031d3a
+# ╠═╡ disabled = true
+#=╠═╡
+
+		begin
+			using Colors
+			# Затем создадим палитру из 100 разных цветов:
+			palette = distinguishable_colors(100)
+			
+			rand(palette, 3, 3)
+		end
+
+  ╠═╡ =#
+
+# ╔═╡ 9c46bb8e-8ba5-11ee-2e47-bb58ccdbb21d
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	n = 0
+	while n < 10
+	n += 1
+	println(n)
+	end
+	
+end
+  ╠═╡ =#
+
+# ╔═╡ 30d69e78-8562-4b3b-b7be-c5b84480d4bd
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	myfriends = ["Ted", "Robyn", "Barney", "Lily", "Marshall"]
+	i = 1
+	while i <= length(myfriends)
+	friend = myfriends[i]
+	println("Hi $friend, it's great to see you!")
+	i += 1
+	end
+	
+end
+  ╠═╡ =#
+
+# ╔═╡ 154b6d24-0de6-4db8-8502-ecdd42de4c10
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	for n in 1:2:10
+	println(n)
+	end
+	myfriends = ["Ted", "Robyn", "Barney", "Lily", "Marshall"]
+	for friend in myfriends
+	println("Hi $friend, it's great to see you!")
+	end
+end
+  ╠═╡ =#
+
+# ╔═╡ 6aa20876-3635-4038-9a64-8abbae13e8e3
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	# инициализация массива m x n из нулей:
+	m, n = 5, 5
+	A = fill(0, (m, n))
+	# формирование массива, в котором значение каждой записи
+	# является суммой индексов строки и столбца:
+	for i in 1:m
+	for j in 1:n
+	A[i, j] = i + j
+	end
+	end
+	A
+	
+end
+  ╠═╡ =#
+
+# ╔═╡ 2835ec97-aa8b-43e9-8bea-c0270f573a4e
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	# инициализация массива m x n из нулей:
+	B = fill(0, (m, n))
+	for i in 1:m, j in 1:n
+	B[i, j] = i + j
+	end
+	B
+	
+	C = [i + j for i in 1:m, j in 1:n]
+	C
+	
+end
+  ╠═╡ =#
+
+# ╔═╡ 09bb03fd-c0da-44d1-8f48-70a97af802d3
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	N = 10
+	# используем `&&` для реализации операции "AND"
+	# операция % вычисляет остаток от деления
+	if (N % 3 == 0) && (N % 5 == 0)
+	println("FizzBuzz")
+	elseif N % 3 == 0
+	println("Fizz")
+	elseif N % 5 == 0
+	println("Buzz")
+	else
+	println(N)
+	end
+end
+  ╠═╡ =#
+
+# ╔═╡ e69e5813-2fdd-4324-88ce-8545d06ac2d6
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	x = 5
+	y = 10
+	(x > y) ? x : y
+end
+  ╠═╡ =#
+
+# ╔═╡ a76a0ce1-01b9-4ca0-bb5c-310ca2c43ed7
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	function sayhi(name)
+	println("Hi $name, it's great to see you!")
+	end
+	sayhi("C-3PO")
+end
+  ╠═╡ =#
+
+# ╔═╡ fadeede6-6655-4431-b51f-a8f07d16fee6
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	sayhi3 = name -> println("Hi $name, it's great to see you!")
+	f3 = x -> x^2
+	sayhi3("Artem")
+	f3(5)
+end
+  ╠═╡ =#
+
+# ╔═╡ d12aa443-efc5-429b-9399-0919bbc48f67
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	# задаём массив v:
+	v = [3, 5, 2]
+	sort(v)
+	v
+	sort!(v)
+	v
+end
+  ╠═╡ =#
+
+# ╔═╡ ffc7f4da-0e50-4e4d-b406-4c887c3e77e8
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	f(x) = x^2
+	map(f, [1, 2, 3])
+end
+  ╠═╡ =#
+
+# ╔═╡ 8cf1a239-9898-4f07-a2e1-89eb69a37fd7
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	x -> x^3
+	map(x -> x^3, [1, 2, 3])
+end
+  ╠═╡ =#
+
+# ╔═╡ 6412994e-e94a-4bc8-8191-4f15c1fd1904
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	f(x) = x^2
+	broadcast(f, [1, 2, 3])
+	
+	f.([1, 2, 3])
+	# Задаём матрицу A:
+	A = [i + 3*j for j in 0:2, i in 1:3]
+	f(A)
+	B = f.(A)
+
+	broadcast(x -> x + 2 * f(x) / x, A)
+	
+end
+  ╠═╡ =#
+
+# ╔═╡ 07ced772-9683-45ae-a6e5-082a749ae726
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	# – выведите на экран целые числа от 1 до 100 и напечатайте их квадраты;
+	for i in 1:1:100
+		print(i)
+		print(" ")
+	end
+	println()
+	for i in 1:1:100
+		print(i^2)
+		print(" ")
+	end
+end
+  ╠═╡ =#
+
+# ╔═╡ 5155ef72-1e6b-4dfd-a68e-f5b929cd4aa6
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	#– создайте словарь squares, который будет содержать целые числа в качестве ключей и # квадраты в качестве их пар-значений;
+	squares = Dict{Int64, Int64}()
+	for i in 1:1:10
+		push!(squares, i => i^2)
+	end
+	pairs(squares)
+end
+  ╠═╡ =#
+
+# ╔═╡ f0d7110b-1c12-47dd-a47d-fa43b5c10830
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	# – создайте массив squares_arr, содержащий квадраты всех чисел от 1 до 100.
+	squares_arr = [];
+	i = 1
+	while (i <= 100)
+		push!(squares_arr, i^2)
+		i += 1;
+	end
+	squares_arr
+end
+  ╠═╡ =#
+
+# ╔═╡ 341473ce-9cfb-4947-9e4a-9a59b868511a
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	begin
+		x = 2
+		if (x % 2 == 0)
+			println("even")
+		else
+			println("odd")
+		end
+	end
+	
+	(x % 2 == 0) ? println("even") : println("odd")
+end
+  ╠═╡ =#
+
+# ╔═╡ 695c8f79-7797-4f70-8533-de58a748e516
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	function add_one(x)
+		x + 1
+	end
+	
+	add_one(2)
+end
+  ╠═╡ =#
+
+# ╔═╡ fe1df1cc-86f4-410b-aaa4-3b2865bf0f9c
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	B = Array{Int64, 2}(undef, 15, 3)
+	
+	for i in 1:1:15
+		B[i,1] = 10
+		B[i,2] = -10
+		B[i,3] = 10
+	end
+
+	B
+
+	C = B' * B
+end
+  ╠═╡ =#
+
+# ╔═╡ a85146a4-64f6-47a9-ac66-059ca979686d
+begin
+	Z = zeros(Int64, 6,6)
+	E = ones(Int64, 6,6)
+
+	Z1 = zeros(Int64, 6,6)
+	for i in 1:1:6
+		if (i != 1)
+			Z1[i, i - 1] = E[i, i-1]
+		end
+
+		if (i != 6)
+			Z1[i, i + 1] = E[i, i+1]
+		end
+	end
+	Z1
+end
+
+# ╔═╡ e09e469e-c15e-49d1-a13d-cd57d69c149f
+begin
+	Z2 = zeros(Int64, 6,6)
+	for i in 1:1:6
+		Z2[i,i] = 1
+		if (i+2 <= 6)
+			Z2[i, i+2] = E[i,i+2]
+		end
+	
+		if (i-2 >= 1)
+			Z2[i, i-2] = E[i,i-2]
+		end
+	end
+	Z2
+end
+
+# ╔═╡ 8a046a5e-9238-48ee-bc96-518aadd6dd2b
+begin
+	Z3 = zeros(Int64, 6,6)
+	for i in 1:1:6
+		Z3[i,7-i] = 1
+		if (7-i + 2 <= 6)
+			Z3[i, 9-i] = E[i,9-i]
+		end
+	
+		if (7-i-2 >= 1)
+			Z3[i, 5-i] = E[i,5-i]
+		end
+	end
+	Z3
+end
+
+# ╔═╡ b60b72a0-6374-4c23-991d-b83d36403e4a
+begin
+	Z4 = zeros(Int64, 6,6)
+	for i in 1:1:6
+		Z4[i,i] = 1
+		if (i + 2 <= 6)
+			Z4[i, i + 2] = E[i,i+2]
+		end
+
+		if (i - 2 >= 1)
+			Z4[i, i - 2] = E[i,i-2]
+		end
+
+		if (i + 4 <= 6)
+			Z4[i, i + 4] = E[i,i+4]
+		end
+
+		if (i - 4 >= 1)
+			Z4[i, i - 4] = E[i,i-4]
+		end
+
+	end
+	Z4
+end
+
+# ╔═╡ 90d59976-e85d-4201-a3d1-64a7f3f2e195
+function outer(x, y, operation)
+	if (ndims(x) == 1)
+		x = reshape(x, (size(x, 1), size(x, 2))) 
+	end 
+	if (ndims(y) == 1) 
+		y = reshape(y, (size(y, 1), size(y, 2))) 
+	end 
+	c = zeros(size(x)[1], size(y)[2])
+
+	for i in 1:size(x)[1], j in 1:size(y)[2], k in 1:size(x)[2]
+		c[i, j] += operation(x[i, k], y[k, j])
+	end
+	return c
+end
+
+# ╔═╡ db7567b9-55b9-4885-a5f0-ed3ff2e4cdfa
+A2 = outer(collect(0:4), collect(1:5)', ^)
+
+# ╔═╡ b6d66612-27df-42f2-94a1-d9bea1293732
+A3 = outer(collect(0:4), collect(0:4)', +).%5
+
+# ╔═╡ 3db38196-e18d-4c8f-85a8-7202d33a5be3
+A4 = outer(collect(0:9), collect(0: 9)', +).%10
+
+# ╔═╡ b324252f-a5c2-44eb-99c7-a3273d7f9fbf
+A5 = outer(collect(0:8), collect(-9:-1)', -).%9
+
+# ╔═╡ 501b7ff3-e9cf-4330-ae4c-715078956759
+begin
+	# коэффициенты из системы уравнений
+	array_system = Array{Int64, 2}(undef, 5, 5)
+	m = 5
+	n = 5
+	for i in 1:1:m
+	    for j in 1:1:n,
+	    	array_system[i, j] = 1 + abs(i - j)
+		end
+	end
+	println(round.(Int32, array_system))
+	
+	answers = [7; -1; -3; 5; 17]
+
+	array_system_inverted = inv(array_system)
+    round.(Int, array_system_inverted)
+    x_n = round.(Int, array_system_inverted * answers)
+end
+
+# ╔═╡ b74f68e3-ac60-4575-a7f7-5601507eee8f
+begin
+	M = rand(1:10, 6, 10)
+	# – Найдите число элементов в каждой строке матрицы 𝑀, которые больше числа 𝑁
+    #(например, 𝑁 = 4).
+	N = 4
+	for i in 1:1:6
+		count = 0
+			for j in 1:1:10
+				if M[i, j] > N
+					count += 1
+				end
+			end
+	println(count)
+	end
+end
+
+# ╔═╡ 9492ff9d-6be8-46ee-9eae-66fa435e8488
+begin
+	N2 = 7
+	for i in 1:1:6
+		count = 0
+			for j in 1:1:10
+	        	if M[i, j] == N2
+	        		count += 1
+				end
+	 		end
+		if count == 2
+	    	println(N2, " в строке ", i, " встречается 2 раза")
+	    end
+	end
+end
+
+# ╔═╡ 3ae5a3c0-ce86-49d2-918c-4823b3349fc1
+begin
+	M10 = rand(1:10, 6, 10)
+	begin
+		function sumEqual75(matrix)
+			matrix_new = rand(10)
+			for i in 1:1:10
+		    	sum = 0 
+		    	for j in 1:1:6
+		        	sum += matrix[j, i]
+		    	end
+		    	matrix_new[i] = sum
+			end
+		    
+			for i in 1:1:10
+		    	for j in i+1:1:10
+		        	sum = matrix_new[i] + matrix_new[j]
+		        	if sum > 75
+		            	println(i, " ", j)
+		        	end
+		    	end
+			end
+		end
+	
+		sumEqual75(M10)
+		
+	end
+end
+
+# ╔═╡ 1c57bfb9-819f-4d54-a18f-3433f8eeb353
+begin
+	sum1 = 0
+		for i in 1:1:20
+	    	for j in 1:1:5
+	        	sum1 += (i^4)/(3+j)
+	    	end
+	    end
+	println(sum1)
+end
+
+# ╔═╡ 4a0f2c4d-3d8b-40b9-8be4-f4060862d2d5
+begin
+	sum2 = 0
+	    for i in 1:1:20
+	    	for j in 1:1:5
+	    		sum2 += (i^4)/(3+i*j)
+	    	end
+	    end
+	    println(sum2)
+end
+
+# ╔═╡ 9768dfe7-e881-4064-8cb1-f244f085b57a
+A = outer(collect(0:4), collect(0:4)', +)
+
+# ╔═╡ 7ba2bb65-550e-40ec-902d-b85bb8f92a80
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	A = [i + 3*j for j in 0:2, i in 1:3]
+	map(l -> l + 1, A)
+end
+  ╠═╡ =#
+
+# ╔═╡ f1f50acb-02d2-4963-b661-b8434a47dc9f
+# ╠═╡ disabled = true
+#=╠═╡
+begin
+	A = [1 1 3; 5 2 6; -2 -1 -3]
+	A^3
+	for i in 7:1:9
+		A[i] += A[i - 3]
+	end
+	A
+end
+  ╠═╡ =#
+
+# ╔═╡ 00000000-0000-0000-0000-000000000001
+PLUTO_PROJECT_TOML_CONTENTS = """
+[deps]
+Colors = "5ae59095-9a9b-59fe-a467-6f913c188581"
+
+[compat]
+Colors = "~0.12.10"
+"""
+
+# ╔═╡ 00000000-0000-0000-0000-000000000002
+PLUTO_MANIFEST_TOML_CONTENTS = """
+# This file is machine-generated - editing it directly is not advised
+
+julia_version = "1.8.5"
+manifest_format = "2.0"
+project_hash = "452ec4d25f6dba97869ca41c8dd5b6105fb38201"
+
+[[deps.Artifacts]]
+uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
+
+[[deps.ColorTypes]]
+deps = ["FixedPointNumbers", "Random"]
+git-tree-sha1 = "eb7f0f8307f71fac7c606984ea5fb2817275d6e4"
+uuid = "3da002f7-5984-5a60-b8a6-cbb66c0b333f"
+version = "0.11.4"
+
+[[deps.Colors]]
+deps = ["ColorTypes", "FixedPointNumbers", "Reexport"]
+git-tree-sha1 = "fc08e5930ee9a4e03f84bfb5211cb54e7769758a"
+uuid = "5ae59095-9a9b-59fe-a467-6f913c188581"
+version = "0.12.10"
+
+[[deps.CompilerSupportLibraries_jll]]
+deps = ["Artifacts", "Libdl"]
+uuid = "e66e0078-7015-5450-92f7-15fbd957f2ae"
+version = "1.0.1+0"
+
+[[deps.FixedPointNumbers]]
+deps = ["Statistics"]
+git-tree-sha1 = "335bfdceacc84c5cdf16aadc768aa5ddfc5383cc"
+uuid = "53c48c17-4a7d-5ca2-90c5-79b7896eea93"
+version = "0.8.4"
+
+[[deps.Libdl]]
+uuid = "8f399da3-3557-5675-b5ff-fb832c97cbdb"
+
+[[deps.LinearAlgebra]]
+deps = ["Libdl", "libblastrampoline_jll"]
+uuid = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+
+[[deps.OpenBLAS_jll]]
+deps = ["Artifacts", "CompilerSupportLibraries_jll", "Libdl"]
+uuid = "4536629a-c528-5b80-bd46-f80d51c5b363"
+version = "0.3.20+0"
+
+[[deps.Random]]
+deps = ["SHA", "Serialization"]
+uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
+
+[[deps.Reexport]]
+git-tree-sha1 = "45e428421666073eab6f2da5c9d310d99bb12f9b"
+uuid = "189a3867-3050-52da-a836-e630ba90ab69"
+version = "1.2.2"
+
+[[deps.SHA]]
+uuid = "ea8e919c-243c-51af-8825-aaa63cd721ce"
+version = "0.7.0"
+
+[[deps.Serialization]]
+uuid = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
+
+[[deps.SparseArrays]]
+deps = ["LinearAlgebra", "Random"]
+uuid = "2f01184e-e22b-5df5-ae63-d93ebab69eaf"
+
+[[deps.Statistics]]
+deps = ["LinearAlgebra", "SparseArrays"]
+uuid = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
+
+[[deps.libblastrampoline_jll]]
+deps = ["Artifacts", "Libdl", "OpenBLAS_jll"]
+uuid = "8e850b90-86db-534c-a0d3-1478176c7d93"
+version = "5.1.1+0"
+"""
+
+# ╔═╡ Cell order:
+# ╠═9c46bb8e-8ba5-11ee-2e47-bb58ccdbb21d
+# ╠═30d69e78-8562-4b3b-b7be-c5b84480d4bd
+# ╠═154b6d24-0de6-4db8-8502-ecdd42de4c10
+# ╠═6aa20876-3635-4038-9a64-8abbae13e8e3
+# ╠═2835ec97-aa8b-43e9-8bea-c0270f573a4e
+# ╠═09bb03fd-c0da-44d1-8f48-70a97af802d3
+# ╠═e69e5813-2fdd-4324-88ce-8545d06ac2d6
+# ╠═a76a0ce1-01b9-4ca0-bb5c-310ca2c43ed7
+# ╠═fadeede6-6655-4431-b51f-a8f07d16fee6
+# ╠═d12aa443-efc5-429b-9399-0919bbc48f67
+# ╠═ffc7f4da-0e50-4e4d-b406-4c887c3e77e8
+# ╠═8cf1a239-9898-4f07-a2e1-89eb69a37fd7
+# ╠═6412994e-e94a-4bc8-8191-4f15c1fd1904
+# ╠═a9dd14c7-4f79-421c-95af-67aa60031d3a
+# ╠═07ced772-9683-45ae-a6e5-082a749ae726
+# ╠═5155ef72-1e6b-4dfd-a68e-f5b929cd4aa6
+# ╠═f0d7110b-1c12-47dd-a47d-fa43b5c10830
+# ╠═341473ce-9cfb-4947-9e4a-9a59b868511a
+# ╠═695c8f79-7797-4f70-8533-de58a748e516
+# ╠═7ba2bb65-550e-40ec-902d-b85bb8f92a80
+# ╠═f1f50acb-02d2-4963-b661-b8434a47dc9f
+# ╠═fe1df1cc-86f4-410b-aaa4-3b2865bf0f9c
+# ╠═a85146a4-64f6-47a9-ac66-059ca979686d
+# ╠═e09e469e-c15e-49d1-a13d-cd57d69c149f
+# ╠═8a046a5e-9238-48ee-bc96-518aadd6dd2b
+# ╠═b60b72a0-6374-4c23-991d-b83d36403e4a
+# ╠═90d59976-e85d-4201-a3d1-64a7f3f2e195
+# ╠═9768dfe7-e881-4064-8cb1-f244f085b57a
+# ╠═db7567b9-55b9-4885-a5f0-ed3ff2e4cdfa
+# ╠═b6d66612-27df-42f2-94a1-d9bea1293732
+# ╠═3db38196-e18d-4c8f-85a8-7202d33a5be3
+# ╠═b324252f-a5c2-44eb-99c7-a3273d7f9fbf
+# ╠═501b7ff3-e9cf-4330-ae4c-715078956759
+# ╠═b74f68e3-ac60-4575-a7f7-5601507eee8f
+# ╠═9492ff9d-6be8-46ee-9eae-66fa435e8488
+# ╠═3ae5a3c0-ce86-49d2-918c-4823b3349fc1
+# ╠═1c57bfb9-819f-4d54-a18f-3433f8eeb353
+# ╠═4a0f2c4d-3d8b-40b9-8be4-f4060862d2d5
+# ╟─00000000-0000-0000-0000-000000000001
+# ╟─00000000-0000-0000-0000-000000000002
